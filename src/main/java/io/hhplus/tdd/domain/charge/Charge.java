@@ -12,9 +12,17 @@ public class Charge {
     public static final LocalTime CARD_COMPANY_MAINTENANCE_START_TIME = LocalTime.of(23,50);
     public static final LocalTime CARD_COMPANY_MAINTENANCE_END_TIME = LocalTime.of(0,30);
 
-    private int chargedPoint;
+    private long chargedPoint;
 
-    public void addPoint(int amount) {
+    public Charge() {
+
+    }
+
+    public Charge(long chargedPoint) {
+        this.chargedPoint = chargedPoint;
+    }
+
+    public void addPoint(long amount) {
 
         if(amount < 1000){
             throw new IllegalArgumentException("충전 금액은 1,000원 이상이어야 합니다.");
@@ -32,7 +40,7 @@ public class Charge {
         this.chargedPoint += amount;
     }
 
-    public void addPoint(LocalDateTime currentDateTime){
+    public void validateMaintenanceTime(LocalDateTime currentDateTime){
 
         LocalTime currentTime = currentDateTime.toLocalTime();
 

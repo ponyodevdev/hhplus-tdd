@@ -6,9 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
-
-
-
 /**
  * 포인트 충전 정책
  *
@@ -26,7 +23,7 @@ public class ChargeTest {
     Charge charge;
 
     @BeforeEach
-    void sepUp(){
+    void setUp(){
         charge = new Charge();
     }
 
@@ -103,7 +100,7 @@ public class ChargeTest {
     void cannotChargeDuringMaintenance(){
 
        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, ()->{
-           charge.addPoint(LocalDateTime.of(2025,7,8,23,50));
+           charge.validateMaintenanceTime(LocalDateTime.of(2025,7,8,23,50));
        });
         Assertions.assertEquals("지금은 카드사 점검 시간입니다. 잠시 후 다시 시도해주세요.", exception.getMessage());
 
