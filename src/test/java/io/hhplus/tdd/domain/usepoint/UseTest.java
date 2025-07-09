@@ -26,7 +26,9 @@ class UseTest {
     @DisplayName("100포인트를 사용하면 정상적으로 사용된다.")
     @Test
     void useValidPoint(){
-        use.usePoint(100, 1000);
+        int amountToUse = 100;
+        int currentBalance = 1000;
+        use.usePoint(amountToUse, currentBalance);
         Assertions.assertEquals(100, use.getUsedPoint());
 
     }
@@ -34,35 +36,32 @@ class UseTest {
     @DisplayName("포인트 사용시 100포인트 단위가 아닌 경우 예외가 발생한다.")
     @Test
     void invalidUnitPoint(){
-        assertChargeThrows(99, "포인트는 100포인트 단위로만 사용할 수 있습니다.");
+        assertUseThrows(99, "포인트는 100포인트 단위로만 사용할 수 있습니다.");
     }
 
     @DisplayName("잔고를 초과한 포인트를 사용하려고 하면 예외가 발생한다.")
     @Test
     void insufficientBalance(){
-        assertChargeThrows(1100, "잔고가 부족합니다.");
+        assertUseThrows(1100, "잔고가 부족합니다.");
     }
 
     @DisplayName("0 포인트를 사용하려고 하면 예외가 발생한다.")
     @Test
     void useZeroPoint(){
-        assertChargeThrows(0, "사용 포인트는 100포인트 이상이어야 합니다.");
+        assertUseThrows(0, "사용 포인트는 100포인트 이상이어야 합니다.");
     }
 
     @DisplayName("0 미만의 포인트를 사용하려고 하면 예외가 발생한다.")
     @Test
     void useNegativePoint(){
-        assertChargeThrows(-100, "사용 포인트는 100포인트 이상이어야 합니다.");
+        assertUseThrows(-100, "사용 포인트는 100포인트 이상이어야 합니다.");
     }
 
 
-    private void assertChargeThrows(int amount, String expectedMessage){
+    private void assertUseThrows(int amount, String expectedMessage){
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, ()->{
             use.usePoint(amount, 1000);
         });
         Assertions.assertEquals(expectedMessage, exception.getMessage());
     }
-
-
-
 }

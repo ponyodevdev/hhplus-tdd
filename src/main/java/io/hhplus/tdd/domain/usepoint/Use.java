@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class Use {
 
-    private int usedPoint;
+    private long usedPoint;
 
-    public void usePoint(int amount, int currentPoint){
+    public void usePoint(long amount, long currentPoint){
         if (amount <= 0) {
             throw new IllegalArgumentException("사용 포인트는 100포인트 이상이어야 합니다.");
         }
