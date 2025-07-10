@@ -1,4 +1,4 @@
-package io.hhplus.tdd.domain.usepoint;
+package io.hhplus.tdd.domain.use;
 
 
 import org.junit.jupiter.api.Assertions;
